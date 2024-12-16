@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Consultar si el usuario y la contraseña son correctos
     $sql = "SELECT * FROM usuarios WHERE username = 'Admin' AND rol = 'admin'";
     //$sql = "SELECT * FROM cuentas WHERE nombre = ?";
-    $stmt = $conn->prepare($sql);
+    //$stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     //$stmt->bind_param("s", $username);
     $stmt->bindValue(1, $username, PDO::PARAM_STR);
     $stmt->execute();
