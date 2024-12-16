@@ -5,13 +5,13 @@
 
 	// Verificar si el administrador está logueado
 	if (!isset($_SESSION['admin_id'])) {
-	    //header("Location: ../Vista/Login_Admin.php");
-	    header("Location: Login_Admin.php");
+	    header("Location: ../Vista/Admin/Login_Admin.php");
+	    //header("Location: Login_Admin.php");
 	    exit();
 	}
 
-	//include('../Controlador/Conexion_BD.php');
-	include('conexion.php');
+	include('../Controlador/Conexion_BD.php');
+	//include('conexion.php');
 
 	// Verificar si se ha enviado el formulario
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,12 +23,14 @@
 
 		try{
 		    // Insertar el nuevo producto
-		    //$sql = "INSERT INTO Producto (Nombre_Producto, Precio, Descripcion_Producto, activo) VALUES (?, ?, ?, 1)";
-		    $sql = "INSERT INTO productos (nombre, precio, descripcion, cantidad, activo) VALUES (?, ?, ?, ?, 1)";
-		    $stmt = $conn->prepare($sql);
+		    $sql = "INSERT INTO Producto (nombre, precio, descripcion, cantidad, activo) VALUES (?, ?, ?, ?, 1)";
+		    //$sql = "INSERT INTO productos (nombre, precio, descripcion, cantidad, activo) VALUES (?, ?, ?, ?, 1)";
+		    //$stmt = $conn->prepare($sql);
+		    $stmt = $pdo->prepare($sql);
 		    $stmt->execute([$nombre, $precio, $descripcion, $cantidad]);
 
-		    header("Location: Admin.php");
+		    header("Location: ../Vista/Admin/Admin.php");
+		    //header("Location: Admin.php");
 		    exit();
 		} catch (PDOException $e) {
 			// Mostrar el error si algo sale mal
