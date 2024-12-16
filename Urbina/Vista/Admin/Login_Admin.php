@@ -2,13 +2,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
-//include('../Modelos/conexion_BD.php');
-include('conexion.php');
+include('../Modelos/conexion_BD.php');
+//include('conexion.php');
 
 // Verificar si el administrador ya está logueado
 if (isset($_SESSION['admin_id'])) {
-    //header("Location: ../Vista/Admin.php");
-    header("Location: Admin.php");
+    header("Location: ../Vista/Admin.php");
+    //header("Location: Admin.php");
     exit();
 }
 
