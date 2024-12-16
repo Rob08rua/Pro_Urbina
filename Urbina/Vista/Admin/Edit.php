@@ -40,12 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descripcion = $_POST['descripcion'];
 
     // Actualizar el producto en la base de datos
-    //$sql = "UPDATE Producto SET Nombre_Producto = ?, Precio = ?, Descripcion_Producto = ? WHERE id_Producto = ?";
-    $sql = "UPDATE productos SET nombre = ?, precio = ?, cantidad = ?, descripcion = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+    $sql = "UPDATE Producto SET nombre = ?, precio = ?, cantidad = ?, descripcion = ? WHERE id = ?";
+    //$sql = "UPDATE productos SET nombre = ?, precio = ?, cantidad = ?, descripcion = ? WHERE id = ?";
+    //$stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([$nombre, $precio, $cantidad, $descripcion, $id_Producto]);
 
-    header("Location: Admin.php");
+    header("Location: ../Vista/Admin/Admin.php");
+    //header("Location: Admin.php");
     exit();
 }
 ?>
