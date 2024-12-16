@@ -2,12 +2,12 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
-include('../Modelos/conexion_BD.php');
+include('../Controlador/Conexion_BD.php');
 //include('conexion.php');
 
 // Verificar si el administrador ya está logueado
 if (isset($_SESSION['admin_id'])) {
-    header("Location: ../Vista/Admin.php");
+    header("Location: ../Vista/Admin/Admin.php");
     //header("Location: Admin.php");
     exit();
 }
@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Consultar si el usuario y la contraseña son correctos
-    //$sql = "SELECT * FROM usuarios WHERE username = 'Admin' AND rol = 'admin'";
-    $sql = "SELECT * FROM cuentas WHERE nombre = ?";
+    $sql = "SELECT * FROM usuarios WHERE username = 'Admin' AND rol = 'admin'";
+    //$sql = "SELECT * FROM cuentas WHERE nombre = ?";
     $stmt = $conn->prepare($sql);
     //$stmt->bind_param("s", $username);
     $stmt->bindValue(1, $username, PDO::PARAM_STR);
@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $result['password'])) {
             $_SESSION['admin_id'] = $result['id'];
             $_SESSION['admin_username'] = $result['nombre'];
-            //header("Location: ../Vista/Admin.php");
-            header("Location: Admin.php");
+            header("Location: ../Vista/Admin/Admin.php");
+            //header("Location: Admin.php");
             exit();
         } else {
             $error = "Contraseña incorrecta.";
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--<link rel="stylesheet" href="../Vista/Estilos/inicio_Se.css">-->
-    <link rel="stylesheet" href="inicio_Se.css">
+    <link rel="stylesheet" href="../Vista/Estilos/inicio_Se.css">
+    <!--<link rel="stylesheet" href="inicio_Se.css">-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-            <!--<a class="nav-link active" href="../Vista/index.php">-->
-            <a class="nav-link active" href="index.php">
-                 <!--<img src="../Vista/imagenes/Logo.jpg" alt="Logo" width="30px" height="24" class="d-inline-block align-text-top">-->
-                 <img src="imagenes/Logo.jpg" alt="Logo" width="30px" height="24" class="d-inline-block align-text-top">
+            <a class="nav-link active" href="../Vista/index.php">
+            <!--<a class="nav-link active" href="index.php">-->
+                 <img src="../Vista/imagenes/Logo.jpg" alt="Logo" width="30px" height="24" class="d-inline-block align-text-top">
+                 <!--<img src="imagenes/Logo.jpg" alt="Logo" width="30px" height="24" class="d-inline-block align-text-top">-->
                  Zona Gamer
              </a>
             </div>
@@ -86,8 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <center>
                 <h4>Inicio de Sesion</h4>
                 </center>
-                      <!--<form action="../Vista/Login_Admin.php" method="POST">-->
-                      <form action="Login_Admin.php" method="POST">
+                      <form action="../Vista/Login_Admin.php" method="POST">
+                      <!--<form action="Login_Admin.php" method="POST">-->
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Usuario:</label>
                             <input type="username" class="form-control" name="username" id="username" required>
