@@ -6,8 +6,8 @@ define('MONEDA', '$');
 
 // Verificar si el administrador está logueado
 if (!isset($_SESSION['admin_id'])) {
-    //header("Location: ../Vista/Login_Admin.php");
-    header("Location: Login_Admin.php");
+    header("Location: ../Vista/Admin/Login_Admin.php");
+    //header("Location: Login_Admin.php");
     exit();
 }
 
@@ -16,15 +16,16 @@ $admin_id = $_SESSION['admin_id'];
 $admin_username = $_SESSION['admin_username'];
 
 // Incluir los archivos necesarios
-//include('../Modelos/nav.php');
-//include('../Controlador/Conexion_BD.php');
-include('nav.php');
-include('conexion.php');
+include('../Modelos/nav.php');
+include('../Controlador/Conexion_BD.php');
+//include('nav.php');
+//include('conexion.php');
 
 // Consulta para obtener todos los productos
-//$sql = "SELECT * FROM Producto WHERE activo = 1";
-$sql = "SELECT * FROM productos WHERE activo = 1";
-$stmt = $conn->prepare($sql);
+$sql = "SELECT * FROM Producto WHERE activo = 1";
+//$sql = "SELECT * FROM productos WHERE activo = 1";
+//$stmt = $conn->prepare($sql);
+$stmt = $pdo->prepare($sql);
 $stmt->execute();
 $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -36,8 +37,8 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="../Vista/Estilos/admin.css">-->
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../Vista/Estilos/admin.css">
+    <!--<link rel="stylesheet" href="admin.css">-->
 </head>
 <body>
     <div class="container">
@@ -70,6 +71,7 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tbody>
                                 <?php foreach ($productos as $producto): ?>
                                 <tr>
+                                    <!--Verificar la base de datos-->
                                     <td><?php echo htmlspecialchars($producto['nombre']); ?></td> <!-- Ajusta el nombre de la clave -->
                                     <td><?php echo MONEDA . htmlspecialchars($producto['precio']); ?></td> <!-- Ajusta la clave del precio -->
                                     <td><?php echo htmlspecialchars($producto['cantidad']); ?></td>
