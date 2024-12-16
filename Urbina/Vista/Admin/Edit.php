@@ -5,13 +5,13 @@ session_start();
 
 // Verificar si el administrador está logueado
 if (!isset($_SESSION['admin_id'])) {
-    //header("Location: ../Vista/Login_Admin.php");
-    header("Location: Login_Admin.php");
+    header("Location: ../Vista/Admin/Login_Admin.php");
+    //header("Location: Login_Admin.php");
     exit();
 }
 
-//include('../Controlador/Conexion_BD.php');
-include('conexion.php');
+include('../Controlador/Conexion_BD.php');
+//include('conexion.php');
 $producto = null;
 
 //if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id_Producto'])) {
@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
     $id_Producto = $_GET['id'];
 
     // Consultar los detalles del producto
-    //$sql = "SELECT * FROM Producto WHERE id_Producto = ?";
-    $sql = "SELECT * FROM productos WHERE id = ?";
+    $sql = "SELECT * FROM Producto WHERE id_Producto = ?";
+    //$sql = "SELECT * FROM productos WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$id_Producto]);
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
