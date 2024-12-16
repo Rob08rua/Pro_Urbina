@@ -11,11 +11,13 @@ if (isset($_SESSION['admin_id'])) {
     session_destroy();
 
     // Redirigir al usuario a la página de login
-    header("Location: Login_Admin.php");
+    //header("Location: Login_Admin.php");
+    header("Location: ../Vista/Admin/Login_Admin.php");
     exit();
 } else {
     // Si no hay sesión activa, redirigir directamente al login
-    header("Location: Login_Admin.php");
+    //header("Location: Login_Admin.php");
+    header("Location: ../Vista/Admin/Login_Admin.php");
     exit();
 }
 ?>
